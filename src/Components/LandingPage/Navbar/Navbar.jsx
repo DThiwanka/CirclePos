@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import logo from './Logo.png';
 
-const Navbar = () => {
+const Navbar = ({ showSignInButton = true, showSignUpButton = true }) => {
     const [nav, setNav] = useState(false);
 
     const handleNav = () => {
@@ -10,15 +11,24 @@ const Navbar = () => {
     };
 
     const navItems = [
-        { id: 1, text: 'About' },
-        { id: 2, text: 'Feature' },
-        { id: 3, text: 'Industries' },
-        { id: 4, text: 'Contact' },
-        { id: 5, text: 'Sign In' },
+        { id: 1, text: 'About', link: '/about' },
+        { id: 2, text: 'Feature', link: '/features' },
+        { id: 3, text: 'Industries', link: '/industries' },
+        { id: 4, text: 'Contact', link: '/contact' },
     ];
 
+    const navigate = useNavigate();
+
+    const handleSignUp = () => {
+        navigate('/signup');
+    };
+
+    const handleSignIn = () => {
+        navigate('/signin');
+    };
+
     return (
-        <div className='bg-gray-100'>
+        <div className='bg-gray-100' >
             <div className='flex justify-between items-center h-24 max-w-full px-4 text-white mx-10'>
                 <h1 className='w-full text-3xl font-bold text-black whitespace-nowrap'>
                     <img src={logo} alt="Logo" className="w-30 h-20" />
@@ -30,14 +40,27 @@ const Navbar = () => {
                             key={item.id}
                             className='p-4 rounded-xl cursor-pointer duration-300 text-black whitespace-nowrap hover:bg-gray-300 hover:text-[#480489]'
                         >
-                            {item.text}
+                            <a href={item.link}>
+                                {item.text}
+                            </a>
                         </li>
                     ))}
                 </ul>
 
-                <button className='hidden md:block text-white bg-[#480489] font-bold py-3 px-6 rounded-md whitespace-nowrap hover:bg-[#380374]'>
-                    Start for Free
-                </button>
+                {showSignInButton && (
+
+                    <button onClick={handleSignIn} className='hidden md:block p-4 rounded-xl cursor-pointer duration-300 text-black whitespace-nowrap hover:bg-gray-300 hover:text-[#480489]'>
+                        Sign In
+                    </button>
+
+                )}
+
+                {showSignUpButton && (
+                    <button onClick={handleSignUp} className='hidden md:block text-white bg-[#480489] font-bold py-3 px-6 rounded-md whitespace-nowrap hover:bg-[#380374] ml-4'>
+                        Start for Free
+                    </button>
+
+                )}
 
                 <div onClick={handleNav} className='block md:hidden z-50'>
                     {nav ? <AiOutlineClose size={20} className='text-[#480489]' /> : <AiOutlineMenu size={20} className='text-[#480489]' />}
@@ -66,14 +89,27 @@ const Navbar = () => {
                                     key={item.id}
                                     className='p-4 border-b border-gray-600 text-white hover:text-[#480489] cursor-pointer w-full text-center'
                                 >
-                                    {item.text}
+                                    <a href={item.link}>
+                                        {item.text}
+                                    </a>
                                 </li>
                             ))}
-                            <li>
-                                <button className='bg-[#480489] text-white px-4 py-2 rounded-xl w-full hover:bg-[#380374]'>
-                                    Start for Free
-                                </button>
-                            </li>
+
+                            {showSignInButton && (
+                                <li>
+                                    <button onClick={handleSignIn} className='bg-[#480489] text-white px-4 py-2 rounded-xl w-full hover:bg-[#380374]'>
+                                        Sign In
+                                    </button>
+                                </li>
+                            )}
+
+                            {showSignUpButton && (
+                                <li>
+                                    <button onClick={handleSignUp} className='bg-[#480489] text-white px-4 py-2 rounded-xl w-full hover:bg-[#380374]'>
+                                        Start for Free
+                                    </button>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>

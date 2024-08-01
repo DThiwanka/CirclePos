@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Navbar from '../LandingPage/Navbar/Navbar';
 
 function Signin() {
   return (
-    <div>
-      <h1>Sign In Page</h1>
-    </div>
-  )
+    <>
+      <Navbar showSignInButton={false} showSignUpButton={false}  />
+      <div className='h-screen'>
+        <h1>Sign In Page</h1>
+      </div>
+    </>
+  );
 }
 
-export default Signin
+export default Signin;

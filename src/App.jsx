@@ -1,16 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-// import Home from './Pages/Home';
-// import About from './Pages/About';
-// import Products from './Pages/Products';
 import LandingPage from './Components/LandingPage/LandingPage';
+import Signin from './Components/SignIn/Signin';
+import Signup from './Components/SignUp/Signup';
  
 const App = () => {
    return (
       <>
          <Routes>
             <Route path="/" element={<LandingPage />} />
-            {/* <Route path="/products" element={<Products />} />
-            <Route path="/about" element={<About />} /> */}
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
          </Routes>
       </>
    );
